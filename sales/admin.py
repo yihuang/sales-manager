@@ -13,7 +13,13 @@ class EmployeeInline(admin.StackedInline):
 class NewUserAdmin(UserAdmin):
     inlines = (EmployeeInline, )
 
+
+@admin.register(SaleData)
+class SaleDataAdmin(admin.ModelAdmin):
+    list_filter = ('created_at', 'shop__name', 'shop__city__name', 'shop__city__region__name', 'product__brand__name', 'product__name')
+    list_display = ('product', 'shop', 'price', 'created_by', 'sale_at')
+
 admin.site.unregister(User)
 admin.site.register(User, NewUserAdmin)
 
-admin.site.register((Product, SaleData, Region, City, Shop))
+admin.site.register((Brand, Product, Region, City, Shop))
