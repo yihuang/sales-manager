@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 class Region(models.Model):
     name = models.CharField(u'区域名', max_length=128)
 
+    def __unicode__(self):
+        return self.name
+
     class __Meta__:
         verbose_name = u'区域'
 
@@ -14,6 +17,9 @@ class City(models.Model):
     region = models.ForeignKey(Region, verbose_name=u'区域')
     name = models.CharField(u'城市名', max_length=128)
 
+    def __unicode__(self):
+        return self.name
+
     class __Meta__:
         verbose_name = u'城市'
 
@@ -21,6 +27,9 @@ class City(models.Model):
 class Shop(models.Model):
     city = models.ForeignKey(City, verbose_name=u'城市')
     name = models.CharField(u'店名', max_length=128)
+
+    def __unicode__(self):
+        return self.name
 
     class __Meta__:
         verbose_name = u'店铺'
@@ -35,8 +44,11 @@ class Employee(models.Model):
 
 
 class Product(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    no = models.CharField(u'编号', max_length=32, primary_key=True)
     name = models.CharField(u'产品名', max_length=128)
+
+    def __unicode__(self):
+        return self.name
 
     class __Meta__:
         verbose_name = u'产品'
